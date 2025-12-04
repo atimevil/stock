@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import os
+import io
 
 def get_top_volume_stocks(limit=10):
     """거래량 상위 종목 수집 (KOSPI + KOSDAQ)"""
@@ -44,7 +45,7 @@ def fetch_naver_stocks_with_code(url, limit=10):
         html = response.text
         
         # pandas read_html로 테이블 구조 파악
-        dfs = pd.read_html(html, encoding='euc-kr')
+        dfs = pd.read_html(io.StringIO(html), encoding='euc-kr')
         
         # 대부분의 네이버 랭킹 페이지에서 메인 테이블은 인덱스 1 또는 2에 있음
         target_df = None

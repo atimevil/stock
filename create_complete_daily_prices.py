@@ -4,6 +4,7 @@ from datetime import datetime
 import time
 from tqdm import tqdm
 import os
+import io
 
 def get_daily_price(code, pages=10):
     """
@@ -22,7 +23,7 @@ def get_daily_price(code, pages=10):
         try:
             response = requests.get(pg_url, headers=headers)
             # pandas read_html을 사용하여 테이블 파싱
-            tables = pd.read_html(response.text)
+            tables = pd.read_html(io.StringIO(response.text))
             # 일별 시세 테이블은 보통 첫 번째에 위치하지만, 구조에 따라 다를 수 있음
             # 네이버 금융 일별 시세 페이지 구조상 첫 번째 테이블이 시세 데이터임
             df = tables[0].dropna()

@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import time
 from tqdm import tqdm
+import io
 
 def get_investor_trend(code, pages=10):
     """
@@ -19,7 +20,7 @@ def get_investor_trend(code, pages=10):
         pg_url = f'{url}&page={page}'
         try:
             response = requests.get(pg_url, headers=headers)
-            tables = pd.read_html(response.text)
+            tables = pd.read_html(io.StringIO(response.text))
             # 투자자별 매매동향 테이블은 보통 3번째(인덱스 2)에 위치함 (페이지 구조에 따라 확인 필요)
             # 네이버 금융 '투자자별 매매동향' 탭의 테이블 구조 확인 필요.
             # 보통 class='type2' 테이블이 여러개 있는데, 그 중 날짜, 종가, 등락률, 기관, 외국인 등이 있는 테이블을 찾아야 함.

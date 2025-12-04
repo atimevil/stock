@@ -3,6 +3,7 @@ import yfinance as yf
 import requests
 import os
 import time
+import io
 
 def get_naver_fundamentals(code):
     """네이버 금융에서 한국 주식 재무 정보 크롤링"""
@@ -11,7 +12,7 @@ def get_naver_fundamentals(code):
     
     try:
         response = requests.get(url, headers=headers)
-        dfs = pd.read_html(response.text, encoding='euc-kr')
+        dfs = pd.read_html(io.StringIO(response.text), encoding='euc-kr')
         
         # 네이버 금융 페이지 구조상 '종목분석' 테이블 찾기
         # 보통 3번째 또는 4번째 테이블에 주요 재무 정보가 있음

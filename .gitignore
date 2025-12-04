@@ -1,0 +1,25 @@
+# Environment Variables (Sensitive)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# Data Files (Can be regenerated)
+daily_prices.csv
+all_institutional_trend_data.csv
+wave_transition_analysis_results.csv
+fundamentals.csv
+ai_analysis_report_*.md
+
+# Logs and Debug
+*.log
+debug_*.py
+debug_output.txt
+
+# OS Specific
+.DS_Store
+Thumbs.db

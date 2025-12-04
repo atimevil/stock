@@ -22,7 +22,7 @@ def main():
         return
 
     # 탭 구성
-    tab1, tab2, tab3 = st.tabs(["📊 Market Overview", "📈 Chart Analysis", "🤖 AI Report"])
+    tab1, tab2, tab3, tab4 = st.tabs(["📊 Market Overview", "📈 Chart Analysis", "💎 Oversold (Value)", "🤖 AI Report"])
     
     # 국가 구분 헬퍼 함수
     def get_country(code):
@@ -34,7 +34,7 @@ def main():
         st.header("Today's Top Picks")
         
         # 점수별 필터링
-        min_score = st.slider("Minimum Score", 0, 100, 60)
+        min_score = st.slider("Minimum Score", 0, 100, 30)
         
         # 서브탭으로 국가 구분
         subtab_kr, subtab_us = st.tabs(["🇰🇷 Domestic (Korea)", "🇺🇸 Overseas (USA)"])
@@ -139,6 +139,48 @@ def main():
             st.error("Price data not loaded.")
 
     with tab3:
+        st.header("💎 Hidden Gems (Oversold)")
+        st.markdown("""
+        **"공포에 사서 환희에 팔아라"** 
+        현재 주가는 하락세(낮은 점수)지만, 과매도 구간(RSI < 40)에 진입하여 반등 가능성이 있는 종목들입니다.
+        장기 투자를 고려한다면 저점 매수의 기회가 될 수 있습니다.
+        """)
+        
+        # 과매도 필터링 (RSI < 40)
+        oversold_df = results_df[results_df['rsi'] < 40].sort_values('rsi')
+        
+        # 서브탭으로 국가 구분
+        subtab_kr, subtab_us = st.tabs(["🇰🇷 Domestic (Korea)", "🇺🇸 Overseas (USA)"])
+        
+        with subtab_kr:
+            kr_oversold = oversold_df[oversold_df['country'] == 'KR']
+            if not kr_oversold.empty:
+                st.dataframe(
+                    kr_oversold[['code', 'name', 'close', 'rsi', 'score', 'wave_stage']],
+                    use_container_width=True,
+                    column_config={
+                        "rsi": st.column_config.NumberColumn("RSI", format="%.1f"),
+                        "score": st.column_config.ProgressColumn("Score", format="%d", min_value=0, max_value=100),
+                    }
+                )
+            else:
+                st.info("국내 주식 중 과매도 종목이 없습니다.")
+
+        with subtab_us:
+            us_oversold = oversold_df[oversold_df['country'] == 'US']
+            if not us_oversold.empty:
+                st.dataframe(
+                    us_oversold[['code', 'name', 'close', 'rsi', 'score', 'wave_stage']],
+                    use_container_width=True,
+                    column_config={
+                        "rsi": st.column_config.NumberColumn("RSI", format="%.1f"),
+                        "score": st.column_config.ProgressColumn("Score", format="%d", min_value=0, max_value=100),
+                    }
+                )
+            else:
+                st.info("미국 주식 중 과매도 종목이 없습니다.")
+
+    with tab4:
         st.header("🤖 AI Analyst Report")
         if ai_report:
             st.markdown(ai_report)

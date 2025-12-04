@@ -11,5 +11,8 @@ else
     echo "✅ Data found. Skipping initial analysis."
 fi
 
+echo "⏰ Starting Daily Scheduler..."
+python auto_run.py &
+
 echo "🚀 Starting Streamlit Dashboard..."
 exec streamlit run dashboard/app.py --server.address=0.0.0.0

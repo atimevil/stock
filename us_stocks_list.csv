@@ -9,9 +9,37 @@ META,Meta Platforms
 AMD,AMD
 NFLX,Netflix
 INTC,Intel
+AVGO,Broadcom
+ORCL,Oracle
+ADBE,Adobe
+CRM,Salesforce
+QCOM,Qualcomm
+JPM,JPMorgan Chase
+V,Visa
+MA,Mastercard
+BAC,Bank of America
+LLY,Eli Lilly
+JNJ,Johnson & Johnson
+UNH,UnitedHealth
+PFE,Pfizer
+WMT,Walmart
+PG,Procter & Gamble
+KO,Coca-Cola
+PEP,PepsiCo
+COST,Costco
+XOM,Exxon Mobil
+CVX,Chevron
 QQQ,Invesco QQQ (Nasdaq 100)
 SPY,SPDR S&P 500
+DIA,SPDR Dow Jones Industrial Average
+IWM,iShares Russell 2000
 SOXL,Direxion Daily Semiconductor Bull 3X
+SOXX,iShares Semiconductor ETF
 TQQQ,ProShares UltraPro QQQ
 JEPI,JPMorgan Equity Premium Income
 SCHD,Schwab US Dividend Equity
+TLT,iShares 20+ Year Treasury Bond
+ARKK,ARK Innovation ETF
+XLE,Energy Select Sector SPDR
+XLF,Financial Select Sector SPDR
+XLV,Health Care Select Sector SPDR

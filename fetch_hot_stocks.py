@@ -107,25 +107,25 @@ def main():
     print("\n[Short-term] Fetching Momentum Stocks...")
     # 1. 거래량 상위
     print("- Top Volume...")
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_quant.naver?sosok=0", 10))
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_quant.naver?sosok=1", 10))
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_quant.naver?sosok=0", 30))
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_quant.naver?sosok=1", 30))
     
     # 2. 상승률 상위
     print("- Top Risers...")
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_rise.naver?sosok=0", 5))
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_rise.naver?sosok=1", 5))
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_rise.naver?sosok=0", 20))
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_rise.naver?sosok=1", 20))
     
     # === Long-term (장기투자) ===
     print("\n[Long-term] Fetching Value & Stable Stocks...")
     # 3. 시가총액 상위 (우량주)
     print("- Top Market Cap...")
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_market_sum.naver?sosok=0", 10)) # KOSPI Top 10
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_market_sum.naver?sosok=1", 5))  # KOSDAQ Top 5
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_market_sum.naver?sosok=0", 50)) # KOSPI Top 50
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_market_sum.naver?sosok=1", 30))  # KOSDAQ Top 30
     
     # 4. 외국인/기관 순매수 상위 (스마트머니)
     print("- Smart Money (Foreigner/Institutional)...")
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_deal_rank.naver?investor_gubun=9000", 5))
-    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_deal_rank.naver?investor_gubun=1000", 5))
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_deal_rank.naver?investor_gubun=9000", 20))
+    all_stocks.extend(fetch_naver_stocks_with_code("https://finance.naver.com/sise/sise_deal_rank.naver?investor_gubun=1000", 20))
     
     # 중복 제거
     unique_stocks = {}

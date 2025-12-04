@@ -151,6 +151,30 @@ python tests/test_data_quality.py
 
 ---
 
+## 🐳 도커(Docker)로 실행하기 (Recommended)
+
+복잡한 설치 과정 없이 도커를 이용하면 바로 실행할 수 있습니다.
+
+### 1. 실행 (Run)
+```bash
+docker-compose up --build
+```
+*   처음 실행 시 이미지를 빌드하고 데이터를 수집하느라 시간이 조금 걸릴 수 있습니다.
+*   실행 후 `http://localhost:8501`에 접속하세요.
+
+### 2. 백그라운드 실행
+```bash
+docker-compose up -d
+```
+
+### 3. 데이터 수동 업데이트
+도커 컨테이너 내부에서 분석 스크립트를 실행합니다.
+```bash
+docker-compose exec stockai python run_analysis.py
+```
+
+---
+
 ## �‍💻 개발자 가이드 (Developer Guide)
 
 새로운 기능을 추가하고 싶은 개발자를 위한 가이드입니다.

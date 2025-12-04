@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  stockai:
+    build: .
+    container_name: stockai
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    restart: unless-stopped

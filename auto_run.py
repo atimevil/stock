@@ -16,26 +16,31 @@ def run_pipeline():
         print(f"[AutoRun] Unexpected error: {e}")
 
 def main():
-    # 목표 실행 시간 설정 (예: 오후 6시 30분 - 장 마감 및 데이터 업데이트 후)
-    TARGET_HOUR = 18
-    TARGET_MINUTE = 30
+    # 목표 실행 시간 리스트 (시, 분)
+    # 1. 08:30 : 장 시작 전 (미국장 마감 반영 + 한국장 준비)
+    # 2. 18:30 : 장 마감 후 (한국장 마감 데이터 분석)
+    SCHEDULES = [(8, 30), (18, 30)]
     
     print(f"🕒 StockAI Auto-Scheduler started.")
-    print(f"🚀 Analysis will run daily at {TARGET_HOUR:02d}:{TARGET_MINUTE:02d}")
+    print(f"🚀 Analysis scheduled at: {[f'{h:02d}:{m:02d}' for h, m in SCHEDULES]}")
     
     while True:
         now = datetime.datetime.now()
+        candidates = []
         
-        # 다음 실행 시간 계산
-        target_time = now.replace(hour=TARGET_HOUR, minute=TARGET_MINUTE, second=0, microsecond=0)
-        
-        # 이미 지난 경우 내일로 설정
-        if now >= target_time:
-            target_time += datetime.timedelta(days=1)
+        # 각 스케줄에 대해 다음 실행 시간 계산
+        for hour, minute in SCHEDULES:
+            target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+            if now >= target:
+                target += datetime.timedelta(days=1)
+            candidates.append(target)
             
-        wait_seconds = (target_time - now).total_seconds()
+        # 가장 가까운 다음 실행 시간 선택
+        next_run = min(candidates)
         
-        print(f"💤 Waiting for next run in {wait_seconds/3600:.1f} hours ({target_time})")
+        wait_seconds = (next_run - now).total_seconds()
+        
+        print(f"💤 Waiting for next run in {wait_seconds/3600:.1f} hours ({next_run})")
         
         # 대기 (CPU 사용 최소화)
         time.sleep(wait_seconds)
